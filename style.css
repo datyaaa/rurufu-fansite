@@ -310,7 +310,6 @@ h1 a {
     border-radius: 10px;
     overflow: hidden; /* 角丸からはみ出る部分を隠す */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    min-width: 400px;
     display: flex; /* iframeとタイトルを縦並びにするため */
     flex-direction: column;
     align-items: center; /* iframeとタイトルを中央寄せ */
@@ -376,4 +375,81 @@ footer p {
 #links-section { /* もしリンクセクションを作ったら */
     scroll-margin-top: 60px; /* ★ヘッダーの高さ（例：60px）に合わせて調整 */
     /* ヘッダーのpadding-topと合わせると良いでしょう */
+}
+
+@media (max-width: 768px) { /* タブレット以下の画面サイズ */
+    .main-nav li a {
+        font-size: 0.9em; /* 例：少し小さくする */
+        padding: 8px 12px; /* パディングも少し小さくすると良いかも */
+    }
+}
+
+@media (max-width: 480px) { /* スマートフォンなどのさらに小さい画面サイズ */
+    .main-nav li a {
+        font-size: 0.8em; /* さらに小さくする */
+        padding: 5px 8px;
+    }
+}
+
+/* ★★★ここから追加・修正するメディアクエリのブロック★★★ */
+
+/* タブレット・スマホ横向き (例: 768px以下) */
+@media (max-width: 768px) {
+    .gallery-container {
+        /* 列の最小幅を少し小さくする (例: 350px) */
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 15px; /* ギャップも少し狭める */
+    }
+}
+
+/* スマートフォン縦向き (例: 480px以下) */
+@media (max-width: 480px) {
+    .gallery-container {
+        /* 1列表示にし、最小幅をスマホの画面幅に合わせて調整 */
+        grid-template-columns: 1fr; /* 1列に固定し、コンテナの幅いっぱいに広がる */
+        gap: 15px; /* 縦方向のギャップのみ残す */
+        /* justify-content: center; は1列だとあまり効果が見えないが残してもOK */
+    }
+    .gallery-section {
+        padding: 20px 15px; /* セクション全体のパディングも調整 */
+    }
+    .video-item {
+        /* min-width: auto; */ /* 念のため、video-itemのmin-widthをリセット（もし残していた場合） */
+    }
+    .video-title {
+        font-size: 0.9em; /* タイトルフォントを少し小さく */
+    }
+}
+
+/* ヘッダーの文字切れ対策も忘れずに */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 15px; /* 左右のパディングを減らす */
+    }
+    h1 a {
+        font-size: 24px;
+    }
+    .main-nav {
+        gap: 10px; /* メニュー間のギャップを減らす */
+        flex-wrap: wrap; /* ヘッダーのナビメニューが折り返すように */
+        justify-content: flex-end; /* または center */
+    }
+    .main-nav li a {
+        font-size: 12px; /* メニューのフォントを小さく */
+        padding: 5px 8px;
+    }
+    /* bodyのpadding-topもヘッダーの高さに合わせて調整 */
+    body {
+        padding-top: 50px; /* 新しいヘッダーの高さに合わせて */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 a {
+        font-size: 20px;
+    }
+    .main-nav {
+        /* 必要なら flex-direction: column; にして縦並びにすることも可能 */
+        /* または、ハンバーガーメニューを実装する */
+    }
 }
